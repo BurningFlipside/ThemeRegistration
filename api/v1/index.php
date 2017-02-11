@@ -36,7 +36,7 @@ function validate_user_has_access($user, $obj)
    {
        return true;
    }
-   return in_array($user->getUid(), $obj['registrars']);
+   return in_array($user->uid, $obj['registrars']);
 }
 
 function list_obj()
@@ -202,7 +202,7 @@ function obj_add()
     {
         $obj['registrars'] = array();
     }
-    array_push($obj['registrars'], $app->user->getUid());
+    array_push($obj['registrars'], $app->user->uid);
     if(isset($obj['_id']) && strlen($obj['_id']) > 0)
     {
         $app->redirect('themes/'.$obj['_id'], 307);
@@ -255,10 +255,10 @@ function obj_edit($id)
     $obj['registrars'] = array_merge($obj['registrars'], $old_obj['registrars']);
     if(validate_user_is_admin($app->user) === FALSE)
     {
-        $uid = $app->user->getUid();
+        $uid = $app->user->uid;
         if(!in_array($uid, $obj['registrars']))
         {
-            array_push($obj['registrars'], $app->user->getUid());
+            array_push($obj['registrars'], $app->user->uid);
         }
     }
     if(!isset($obj['_id']))

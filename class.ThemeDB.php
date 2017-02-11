@@ -1,5 +1,5 @@
 <?php
-require_once("/var/www/secure_settings/class.FlipsideSettings.php");
+//require_once("/var/www/secure_settings/class.FlipsideSettings.php");
 class ThemeDB
 {
     private $dataSet;

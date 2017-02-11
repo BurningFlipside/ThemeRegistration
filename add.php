@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 require_once('class.ThemePage.php');
 $page = new ThemePage('Theme');
 
-$page->add_js_from_src('js/add.js');
+$page->addJSByURI('js/add.js');
 $page->body .= '
     <div id="content">
         <fieldset id="request_set">

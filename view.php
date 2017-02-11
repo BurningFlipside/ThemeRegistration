@@ -7,7 +7,7 @@ $page = new ThemePage('Burning Flipside - Registration');
 
 $page->addWellKnownJS(JS_DATATABLE, false);
 $page->addWellKnownCSS(CSS_DATATABLE);
-$page->add_js_from_src('js/view.js');
+$page->addJSByURI('js/view.js');
 
 if(!FlipSession::isLoggedIn())
 {
