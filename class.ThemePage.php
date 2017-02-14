@@ -18,7 +18,7 @@ class ThemePage extends SecurePage
         $dir = $this->theme_root;
         if(!FlipSession::isLoggedIn())
         {
-            $this->addLink('Login', 'http://profiles.burningflipside.com/login.php?return='.$this->current_url());
+            $this->addLink('Login', 'http://profiles.burningflipside.com/login.php?return='.$this->currentURL());
         }
         else
         {
