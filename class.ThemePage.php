@@ -1,5 +1,5 @@
 <?php
-require_once('class.SecurePage.php');
+require_once('../class.SecurePage.php');
 class ThemePage extends SecurePage
 {
     public $theme_root;
