@@ -15,7 +15,7 @@ $page->body .= '
     <div id="content">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">You must <a href="https://profiles.burningflipside.com/login.php?return='.$page->current_url().'">log in <span class="glyphicon glyphicon-log-in"></span></a> to access the Burning Flipside Registration system!</h1>
+                <h1 class="page-header">You must <a href="'.$page->loginUrl.'?return='.$page->currentUrl().'">log in <span class="glyphicon glyphicon-log-in"></span></a> to access the Burning Flipside Registration system!</h1>
             </div>
         </div>
     </div>
