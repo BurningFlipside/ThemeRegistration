@@ -3,7 +3,7 @@ class ThemePlugin extends SecurePlugin
 {
     function get_secure_menu_entries($page, $user)
     {
-        $ret = array('Themes'=>$page->secure_root.'themes/index.php');
+        $ret = array('Theme Registration'=>$page->secure_root.'themes/index.php');
         return $ret;
     }
 
