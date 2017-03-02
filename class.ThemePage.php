@@ -1,6 +1,6 @@
 <?php
-require_once('../class.SecurePage.php');
-class ThemePage extends SecurePage
+require_once('../class.SecureLoginRequiredPage.php');
+class ThemePage extends SecureLoginRequiredPage
 {
     public $theme_root;
 

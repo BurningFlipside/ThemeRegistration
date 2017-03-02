@@ -9,20 +9,6 @@ $page->addWellKnownJS(JS_DATATABLE, false);
 $page->addWellKnownCSS(CSS_DATATABLE);
 $page->addJSByURI('js/view.js');
 
-if(!FlipSession::isLoggedIn())
-{
-$page->body .= '
-    <div id="content">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">You must <a href="'.$page->loginUrl.'?return='.$page->currentUrl().'">log in <span class="glyphicon glyphicon-log-in"></span></a> to access the Burning Flipside Registration system!</h1>
-            </div>
-        </div>
-    </div>
-';
-}
-else
-{
 $page->body .= '
 <div id="content">
         <div class="panel panel-default">
@@ -46,7 +32,6 @@ $page->body .= '
             </idv>
         </div>
 </div>';
-}
 
-$page->print_page();
+$page->printPage();
 ?>
