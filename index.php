@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 require_once('class.ThemePage.php');
 require_once('class.ThemeDB.php');
-$page = new ThemePage('Burning Flipside - Theme');
+$page = new SecurePage('Burning Flipside - Theme');
 
 $db = new ThemeDB();
 $themes = array();
