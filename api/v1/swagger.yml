@@ -1,0 +1,153 @@
+swagger: '2.0'
+info:
+  version: "0.0.1"
+  title: Burning Flipside Volunteer System API
+  description: Theme Registration API
+  contact:
+    name: Technology Team
+    email: technology@burningflipside.com
+host: secure.burningflipside.com
+schemes:
+  - https
+basePath: /themes/api/v1
+produces:
+  - application/json
+paths:
+  /:
+    get:
+      summary: List submitted themes
+      description: |
+
+      tags:
+        - Themes
+      responses:
+        200:
+          description: An array of themes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Theme'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a new Theme
+      description: |
+        Create a new theme entry
+      tags:
+        - Themes
+      parameters:
+        - name: theme
+          in: body
+          description: The theme data to create
+          required: true
+          schema:
+            $ref: '#/definitions/Theme'
+      responses:
+        201:
+          description: An array of themes
+          headers:
+            Location:
+              description: The URI for the new theme
+              type: string
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/Error'
+  /{id}:
+    get:
+      summary: Get Single Theme
+      description: Returns the single theme specified by the name
+      tags:
+        - Themes
+      parameters:
+        - name: id
+          in: path
+          description: The id for the theme
+          required: true
+          type: string
+      responses:
+        200:
+          description: A theme
+          schema:
+            $ref: '#/definitions/Theme'
+        404:
+          description: record not found
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/Error'
+    patch:
+      summary: Update Department
+      description: Modify one or more fields in the theme
+      tags:
+        - Themes
+      parameters:
+        - name: id
+          in: path
+          description: The id for the theme
+          required: true
+          type: string
+        - name: theme
+          in: body
+          description: The theme data to edit
+          required: true
+          schema:
+            $ref: '#/definitions/Theme'
+      responses:
+        200:
+          description: The edited theme object
+          schema:
+            $ref: '#/definitions/Theme'
+        404:
+          description: record not found
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete Department
+      description: Delete a department
+      tags:
+        - Themes
+      parameters:
+        - name: id
+          in: path
+          description: The id for the theme
+          required: true
+          type: string
+      responses:
+        200:
+          description: The requested theme was deleted
+        404:
+          description: record not found
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  Theme:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique id for the theme.
+      name:
+        type: string
+        description: The name for the theme.
+      presenting:
+        type: boolean
+        description: Will there be a theme presentation at town hall.
+
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
