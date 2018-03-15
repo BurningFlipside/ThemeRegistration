@@ -32,6 +32,7 @@ function submit_page(e)
     $.ajax({
         url: 'api/v1/themes',
         type: 'post',
+        contentType: 'application/json',
         dataType: 'json',
         data: JSON.stringify(obj),
         processData: false,

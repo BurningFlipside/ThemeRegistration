@@ -6,7 +6,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
         parent::__construct('registration', 'themes', '_id');
     }
 
-    public function set($app)
+    public function setup($app)
     {
         parent::setup($app);
     }
@@ -66,7 +66,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
     {
         $varsDataTable = \DataSetFactory::getDataTableByNames($this->dataSetName, 'vars');
         $arr = $varsDataTable->read(new \Data\Filter("name eq 'year'"));
-        return intval($arr[0]['value']);
+        return $arr[0]['value'];
     }
 
     protected function manipulateParameters($request, &$odata)
@@ -94,9 +94,9 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
         {
             $obj['registrars'] = array();
         }
-        if(!in_array($app->user->uid, $obj['registrars']))
+        if(!in_array($this->user->uid, $obj->registrars))
         {
-            array_push($obj['registrars'], $app->user->uid);
+            array_push($obj['registrars'], $this->user->uid);
         }
         return true;
     }
