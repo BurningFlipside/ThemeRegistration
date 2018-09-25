@@ -7,18 +7,17 @@ $page = new ThemePage('Burning Flipside - Registration');
 
 $page->addWellKnownJS(JS_DATATABLE, false);
 $page->addWellKnownCSS(CSS_DATATABLE);
-$page->addJSByURI('js/view.js');
 
 $page->body .= '
 <div id="content">
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="themeHeader">
+        <div class="card">
+            <div class="card-header" role="tab" id="themeHeader">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#tc" aria-expanded="true" aria-controls="tc">Themes</a>
                 </h4>
             </div>
-            <div id="tc" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="themeHeader">
-                <div class="panel-body">
+            <div id="tc" class="collapse show" role="tabpanel" aria-labelledby="themeHeader">
+                <div class="card-body">
                     <table class="table" id="themeTable">
                         <thead>
                             <tr>
