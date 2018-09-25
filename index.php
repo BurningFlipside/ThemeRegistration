@@ -19,5 +19,5 @@ $page->body .= '
     </ul>
 </div>';
 
-$page->print_page();
+$page->printPage();
 ?>
