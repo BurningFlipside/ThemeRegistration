@@ -11,6 +11,15 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
         parent::setup($app);
     }
 
+    public function isThemeAdmin()
+    {
+        if(!isset($this->themeAdmin))
+        {
+            $this->themeAdmin = $this->user->isInGroupNamed('ThemeAdmins');
+        }
+        return $this->themeAdmin;
+    }
+
     protected function processEntry($obj, $request)
     {
         foreach($obj as $key=>$value)
@@ -22,7 +31,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
             else if(is_object($value) || is_array($value))
             {
                 if($key === 'value') continue;
-                if(!$this->user->isInGroupNamed('ThemeAdmins'))
+                if(!$this->isThemeAdmin())
                 {
                     unset($obj[$key]);
                 }
@@ -40,7 +49,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
     protected function canUpdate($request, $entity)
     {
         $this->validateLoggedIn($request);
-        if($this->user->isInGroupNamed('ThemeAdmins'))
+        if($this->isThemeAdmin())
         {
             return true;
         }
@@ -50,7 +59,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
     protected function canDelete($request, $entity)
     {
         $this->validateLoggedIn($request);
-        if($this->user->isInGroupNamed('ThemeAdmins'))
+        if($this->isThemeAdmin())
         {
             return true;
         }
@@ -72,7 +81,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
     protected function manipulateParameters($request, &$odata)
     {
         $queryParams = $request->getQueryParams();
-        if(!$this->user->isInGroupNamed('ThemeAdmins') || $odata->filter === false)
+        if(!$this->isThemeAdmin() || $odata->filter === false)
         {
             $odata->filter = new \Data\Filter('year eq '.$this->getCurrentYear());
         }
@@ -89,7 +98,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
         {
             throw new Exception('Missing one or more required parameters!', \Http\Rest\INTERNAL_ERROR);
         }
-        $obj['year'] = $this->getCurrentYear();
+        $obj['year'] = intval($this->getCurrentYear());
         if(!isset($obj['registrars']))
         {
             $obj['registrars'] = array();
@@ -113,7 +122,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
             $obj['registrars'] = array();
         }
         $obj['registrars'] = array_merge($obj['registrars'], $oldObj['registrars']);
-        if($this->user->isInGroupNamed('ThemeAdmins'))
+        if($this->isThemeAdmin())
         {
             array_push($obj['registrars'], $this->user->uid);
         }
