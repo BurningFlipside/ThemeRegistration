@@ -91,6 +91,7 @@ function render_event_time(data, type, row, meta)
 
 function init_tables()
 {
+  if($.fn.dataTable !== undefined) {
     $('#themeTable').dataTable({
         'ajax': 'api/v1/themes?fmt=data-table',
         'columns': [
@@ -98,6 +99,10 @@ function init_tables()
             {'data': 'presenting'}
         ]
     });
+  }
+  else {
+    setTimeout(init_tables, 500);
+  }
 }
 
 $(init_tables);
