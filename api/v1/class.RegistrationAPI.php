@@ -1,5 +1,5 @@
 <?php
-class RegistrationAPI extends Http\Rest\DataTableAPI
+class RegistrationAPI extends Flipside\Http\Rest\DataTableAPI
 {
     public function __construct()
     {
@@ -68,13 +68,13 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
 
     protected function getFilterForPrimaryKey($value)
     {
-        return new \Data\Filter($this->primaryKeyName.' eq '.new MongoId($value));
+        return new \Flipside\Data\Filter($this->primaryKeyName.' eq '.new MongoId($value));
     }
 
     protected function getCurrentYear()
     {
-        $varsDataTable = \DataSetFactory::getDataTableByNames($this->dataSetName, 'vars');
-        $arr = $varsDataTable->read(new \Data\Filter("name eq 'year'"));
+        $varsDataTable = \Flipside\DataSetFactory::getDataTableByNames($this->dataSetName, 'vars');
+        $arr = $varsDataTable->read(new \Flipside\Data\Filter("name eq 'year'"));
         return $arr[0]['value'];
     }
 
@@ -83,7 +83,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
         $queryParams = $request->getQueryParams();
         if(!$this->isThemeAdmin() || $odata->filter === false)
         {
-            $odata->filter = new \Data\Filter('year eq '.$this->getCurrentYear());
+            $odata->filter = new \Flipside\Data\Filter('year eq '.$this->getCurrentYear());
         }
         if(isset($queryParams['no_logo']))
         {
@@ -96,7 +96,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
     {
         if(!isset($obj['name']))
         {
-            throw new Exception('Missing one or more required parameters!', \Http\Rest\INTERNAL_ERROR);
+            throw new Exception('Missing one or more required parameters!', \Flipside\Http\Rest\INTERNAL_ERROR);
         }
         $obj['year'] = intval($this->getCurrentYear());
         if(!isset($obj['registrars']))
@@ -114,7 +114,7 @@ class RegistrationAPI extends Http\Rest\DataTableAPI
     {
         if(!isset($obj['name']))
         {
-            throw new Exception('Missing one or more required parameters!', \Http\Rest\INTERNAL_ERROR);
+            throw new Exception('Missing one or more required parameters!', \Flipside\Http\Rest\INTERNAL_ERROR);
         }
         $obj['year'] = $this->getCurrentYear();
         if(!isset($obj['registrars']))

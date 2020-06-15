@@ -7,7 +7,7 @@ class ThemeDB
     
     function __construct()
     {
-        $this->dataSet = \DataSetFactory::getDataSetByName('registration');
+        $this->dataSet = \Flipside\DataSetFactory::getDataSetByName('registration');
     }
 
     function getCurrentYear()
@@ -16,7 +16,7 @@ class ThemeDB
         {
             $this->tables['vars'] = $this->dataSet['vars'];
         }
-        $data = $this->tables['vars']->read(new \Data\Filter('name eq year'));
+        $data = $this->tables['vars']->read(new \Flipside\Data\Filter('name eq year'));
         if(empty($data))
         {
             return false;
@@ -34,15 +34,15 @@ class ThemeDB
         $filter = false;
         if($year !== '*' && $uid !== false)
         {
-            $filter = new \Data\Filter("year eq $year and registrars eq $uid");
+            $filter = new \Flipside\Data\Filter("year eq $year and registrars eq $uid");
         }
         else if($year !== '*')
         {
-            $filter = new \Data\Filter("year eq $year");
+            $filter = new \Flipside\Data\Filter("year eq $year");
         }
         else if($uid !== false)
         {
-            $filter = new \Data\Filter("registrars eq $uid");
+            $filter = new \Flipside\Data\Filter("registrars eq $uid");
         }
         $data = $table->read($filter, $fields);
         return $data;
@@ -74,7 +74,7 @@ class ThemeDB
     function getObjectFromCollectionByID($collection, $id)
     {
         $table = $this->dataSet[$collection];
-        $data = $table->read(new \Data\Filter("_id eq $id"));
+        $data = $table->read(new \Flipside\Data\Filter("_id eq $id"));
         if(empty($data))
         {
             return false;
@@ -99,7 +99,7 @@ class ThemeDB
         $id = $obj['_id'];
         unset($obj['_id']);
         $table = $this->dataSet[$collection];
-        $res = $table->update(new \Data\Filter("_id eq $id"), $obj);
+        $res = $table->update(new \Flipside\Data\Filter("_id eq $id"), $obj);
         if($res !== false)
         {
             return true;
@@ -112,7 +112,7 @@ class ThemeDB
         $id = $obj['_id'];
         unset($obj['_id']);
         $table = $this->dataSet[$collection];
-        return $table->delete(new \Data\Filter("_id eq $id"));
+        return $table->delete(new \Flipside\Data\Filter("_id eq $id"));
     }
 
     function getAllThemes($year = false)
