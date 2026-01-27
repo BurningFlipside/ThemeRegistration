@@ -103,7 +103,7 @@ class RegistrationAPI extends Flipside\Http\Rest\DataTableAPI
         {
             $obj['registrars'] = array();
         }
-        if(!in_array($this->user->uid, $obj->registrars))
+        if(!in_array($this->user->uid, $obj['registrars']))
         {
             array_push($obj['registrars'], $this->user->uid);
         }

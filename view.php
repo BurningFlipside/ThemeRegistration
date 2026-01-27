@@ -5,8 +5,8 @@ require_once('class.ThemePage.php');
 require_once('class.ThemeDB.php');
 $page = new ThemePage('Burning Flipside - Registration');
 
-$page->addWellKnownJS(JS_DATATABLE, false);
-$page->addWellKnownCSS(CSS_DATATABLE);
+$page->addCSS('//unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator.min.css');
+$page->addJS('//unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js');
 
 $page->body .= '
 <div id="content">
